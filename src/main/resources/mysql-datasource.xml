@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans.xsd
+	   http://www.springframework.org/schema/tx
+	   http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- 定义使用C3P0连接池的数据源 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <!-- 指定连接数据库的JDBC驱动 -->
+        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+        <!-- 连接数据库所用的URL -->
+        <property name="jdbcUrl" value="${db_url}"/>
+        <!-- 连接数据库的用户名 -->
+        <property name="user" value="${db_username}"/>
+        <!-- 连接数据库的密码 -->
+        <property name="password" value="${db_password}"/>
+        <!-- 设置数据库连接池的最大连接数 -->
+        <property name="maxPoolSize" value="${db_maxPoolSize}"/>
+        <!-- 设置数据库连接池的最小连接数 -->
+        <property name="minPoolSize" value="${db_minPoolSize}"/>
+        <!-- 设置数据库连接池的初始化连接数 -->
+        <property name="initialPoolSize" value="${db_initialPoolSize}"/>
+        <!-- 设置数据库连接池的连接的最大空闲时间,单位为秒 -->
+        <property name="maxIdleTime" value="${db_maxIdleTime}"/>
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation" value="classpath*:mybatis/mybatis-config.xml" />
+        <property name="mapperLocations" value="classpath*:mybatis/mappers/*.xml"/>
+    </bean>
+
+    <bean name="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />-->
+        <property name="basePackage" value="com.chengyuxing.graphql.dao" />
+    </bean>
+
+
+</beans>

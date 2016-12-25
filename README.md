@@ -8,7 +8,7 @@ graphql-java测试
 ```json
 request-body:
 {
-	user(id:6) 
+	userDO(id:6)
 	{
 		id,
 		sex,
@@ -19,7 +19,7 @@ request-body:
 
 response-body
 {
-  "user": {
+  "userDO": {
     "id": 6,
     "sex": 0,
     "name": "Name_6",

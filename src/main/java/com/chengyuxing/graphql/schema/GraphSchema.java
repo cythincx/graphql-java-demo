@@ -1,6 +1,6 @@
 package com.chengyuxing.graphql.schema;
 
-import com.chengyuxing.graphql.domain.User;
+import com.chengyuxing.graphql.domain.UserDO;
 import graphql.GraphQL;
 import graphql.schema.GraphQLFieldDefinition;
 import graphql.schema.GraphQLList;
@@ -34,7 +34,7 @@ public class GraphSchema {
          * 会员对象结构
          */
         userType = newObject()
-                .name("User")
+                .name("UserDO")
                 .field(newFieldDefinition().name("id").type(GraphQLInt).build())
                 .field(newFieldDefinition().name("age").type(GraphQLInt).build())
                 .field(newFieldDefinition().name("sex").type(GraphQLInt).build())
@@ -58,13 +58,13 @@ public class GraphSchema {
                     int id = environment.getArgument("id");
 
                     // 执行查询, 这里随便用一些测试数据来说明问题
-                    User user = new User();
-                    user.setId(id);
-                    user.setAge(id + 15);
-                    user.setSex(id % 2);
-                    user.setName("Name_" + id);
-                    user.setPic("pic_" + id + ".jpg");
-                    return user;
+                    UserDO userDO = new UserDO();
+                    userDO.setId(id);
+                    userDO.setAge(id + 15);
+                    userDO.setSex(id % 2);
+                    userDO.setName("Name_" + id);
+                    userDO.setPic("pic_" + id + ".jpg");
+                    return userDO;
                 })
                 .build();
     }
@@ -87,15 +87,15 @@ public class GraphSchema {
                     String name = environment.getArgument("name");
 
                     // 执行查询, 这里随便用一些测试数据来说明问题
-                    List<User> list = new ArrayList<>(size);
+                    List<UserDO> list = new ArrayList<>(size);
                     for (int i = 0; i < size; i++) {
-                        User user = new User();
-                        user.setId(i);
-                        user.setAge(i + 15);
-                        user.setSex(i % 2);
-                        user.setName(name + "_" + page + "_" + i);
-                        user.setPic("pic_" + i + ".jpg");
-                        list.add(user);
+                        UserDO userDO = new UserDO();
+                        userDO.setId(i);
+                        userDO.setAge(i + 15);
+                        userDO.setSex(i % 2);
+                        userDO.setName(name + "_" + page + "_" + i);
+                        userDO.setPic("pic_" + i + ".jpg");
+                        list.add(userDO);
                     }
                     return list;
                 })

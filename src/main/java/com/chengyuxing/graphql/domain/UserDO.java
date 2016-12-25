@@ -7,34 +7,34 @@ package com.chengyuxing.graphql.domain;
  * Time: 下午6:26
  * Description:
  */
-public class User {
-    private int id;
-    private int age;
-    private int sex;
+public class UserDO {
+    private Integer id;
+    private Integer age;
+    private Integer sex;
     private String name;
     private String pic;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
-    public int getSex() {
+    public Integer getSex() {
         return sex;
     }
 
-    public void setSex(int sex) {
+    public void setSex(Integer sex) {
         this.sex = sex;
     }
 

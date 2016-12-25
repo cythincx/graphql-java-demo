@@ -13,4 +13,17 @@
     <context:component-scan base-package="com.chengyuxing.graphql"></context:component-scan>
     <mvc:annotation-driven />
 
+    <!-- 将多个配置文件位置放到列表中 -->
+    <!--<bean id="propertyResources" class="java.util.ArrayList">-->
+        <!--<constructor-arg>-->
+            <!--<list>-->
+                <!--<value>classpath*:db.properties</value>-->
+            <!--</list>-->
+        <!--</constructor-arg>-->
+    <!--</bean>-->
+
+    <context:property-placeholder location="classpath:db.properties"/>
+
+    <import resource="classpath*:mysql-datasource.xml"/>
+
 </beans>

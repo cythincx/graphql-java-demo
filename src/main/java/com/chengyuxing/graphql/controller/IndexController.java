@@ -1,6 +1,6 @@
 package com.chengyuxing.graphql.controller;
 
-import com.chengyuxing.graphql.schema.GraphSchema;
+import com.chengyuxing.graphql.schema.UserSchema;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,13 +21,13 @@ import javax.annotation.Resource;
 public class IndexController {
 
     @Resource
-    private GraphSchema graphSchema;
+    private UserSchema userSchema;
 
     @ResponseBody
     @RequestMapping(value="/getUser",method= RequestMethod.POST)
     public Object getUser(@RequestBody String query){
 
-        Object result = graphSchema.doQuery(query);
+        Object result = userSchema.doQuery(query);
 
         return result;
     }
