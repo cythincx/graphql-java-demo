@@ -2,16 +2,11 @@ package com.chengyuxing.graphql.schema;
 
 import com.chengyuxing.graphql.dao.IUserDAO;
 import com.chengyuxing.graphql.domain.UserDO;
-import com.chengyuxing.graphql.service.UserService;
 import graphql.GraphQL;
-import graphql.schema.GraphQLFieldDefinition;
-import graphql.schema.GraphQLList;
-import graphql.schema.GraphQLOutputType;
-import graphql.schema.GraphQLSchema;
+import graphql.schema.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
@@ -42,6 +37,24 @@ public class UserSchema {
         return schema;
     }
 
+    public class GetUserDataFetcher implements DataFetcher{
+        private IUserDAO innerUserDAO;
+
+        public GetUserDataFetcher(IUserDAO userDao){
+            innerUserDAO = userDao;
+        }
+
+        @Override
+        public Object get(DataFetchingEnvironment dataFetchingEnvironment) {
+            int id = dataFetchingEnvironment.getArgument("id");
+            System.out.println("id=" + id);
+            List<UserDO> userDO = userDAO.getUserById(id);
+            return userDO;
+        }
+    }
+
+    private DataFetcher getUserDataFetcher;
+
     private void initOutputType() {
         userType = newObject()
                 .name("UserDO")
@@ -58,17 +71,13 @@ public class UserSchema {
                 .name("user")
                 .argument(newArgument().name("id").type(GraphQLInt).build())
                 .type(new GraphQLList(userType))
-                .dataFetcher(environment -> {
-                    int id = environment.getArgument("id");
-                    System.out.println("id=" + id);
-                    List<UserDO> userDO = UserService.getUserById(id);
-                    return userDO;
-                })
+                .dataFetcher(getUserDataFetcher)
                 .build();
     }
 
     public UserSchema(){
         initOutputType();
+        getUserDataFetcher = new GetUserDataFetcher(this.userDAO);
         schema = GraphQLSchema.newSchema().query(newObject()
                 .name("GraphQuery")
                 .field(getUser())
@@ -79,7 +88,6 @@ public class UserSchema {
 
     public Object doQuery(String query){
         GraphQLSchema schema = new UserSchema().getSchema();
-
         Map<String, Object> result = null;
 
         try {
