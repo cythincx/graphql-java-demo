@@ -1,5 +1,8 @@
 package com.chengyuxing.graphql.controller;
 
+import com.chengyuxing.graphql.dao.IUserDAO;
+import com.chengyuxing.graphql.domain.UserDO;
+import com.chengyuxing.graphql.schema.GraphSchema;
 import com.chengyuxing.graphql.schema.UserSchema;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -23,6 +27,12 @@ public class IndexController {
     @Resource
     private UserSchema userSchema;
 
+    @Resource
+    private GraphSchema graphSchema;
+
+//    @Resource
+//    private IUserDAO userDAO;
+
     @ResponseBody
     @RequestMapping(value="/getUser",method= RequestMethod.POST)
     public Object getUser(@RequestBody String query){
@@ -31,4 +41,12 @@ public class IndexController {
 
         return result;
     }
+
+//    @ResponseBody
+//    @RequestMapping(value="/test",method=RequestMethod.GET)
+//    public Object test(){
+//        List<UserDO> list = userDAO.getUserById(1);
+//
+//        return list;
+//    }
 }

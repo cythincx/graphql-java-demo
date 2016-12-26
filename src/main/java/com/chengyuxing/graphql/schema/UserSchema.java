@@ -2,10 +2,13 @@ package com.chengyuxing.graphql.schema;
 
 import com.chengyuxing.graphql.dao.IUserDAO;
 import com.chengyuxing.graphql.domain.UserDO;
+import com.chengyuxing.graphql.service.UserService;
 import graphql.GraphQL;
 import graphql.schema.GraphQLFieldDefinition;
+import graphql.schema.GraphQLList;
 import graphql.schema.GraphQLOutputType;
 import graphql.schema.GraphQLSchema;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -28,7 +31,7 @@ import static graphql.schema.GraphQLObjectType.newObject;
 @Service("UserSchema")
 public class UserSchema {
 
-    @Resource
+    @Autowired(required = true)
     private IUserDAO userDAO;
 
     private GraphQLOutputType userType;
@@ -54,11 +57,11 @@ public class UserSchema {
         return newFieldDefinition()
                 .name("user")
                 .argument(newArgument().name("id").type(GraphQLInt).build())
-                .type(userType)
+                .type(new GraphQLList(userType))
                 .dataFetcher(environment -> {
-                    // 获取查询参数
                     int id = environment.getArgument("id");
-                    List<UserDO> userDO = userDAO.getUserById(id);
+                    System.out.println("id=" + id);
+                    List<UserDO> userDO = UserService.getUserById(id);
                     return userDO;
                 })
                 .build();

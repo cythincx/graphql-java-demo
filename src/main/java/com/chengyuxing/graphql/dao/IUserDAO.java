@@ -13,7 +13,7 @@ import java.util.List;
  * Time: 上午12:00
  * Description:
  */
-@Repository
+
 public interface IUserDAO {
     List<UserDO> getUserById(@Param("id") Integer id);
 }

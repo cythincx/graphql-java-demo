@@ -11,6 +11,9 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <spring.version>4.1.1.RELEASE</spring.version>
+    <maven-resources-plugin.version>2.5</maven-resources-plugin.version>
+    <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
+    <maven-surefire-plugin.version>2.5</maven-surefire-plugin.version>
   </properties>
 
   <dependencies>
@@ -106,6 +109,9 @@
       <version>2.4.5</version>
     </dependency>
   </dependencies>
+
+
+
   <build>
     <finalName>graphql-java-demo2</finalName>
   </build>
