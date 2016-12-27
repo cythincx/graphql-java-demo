@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="graphql-java-demo2:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="graphql-java-demo2.war">
-      <element id="artifact" artifact-name="graphql-java-demo2:war exploded" />
-    </root>
-  </artifact>
-</component>
