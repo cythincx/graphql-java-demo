@@ -7,6 +7,7 @@ import graphql.schema.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Map;
 
@@ -37,12 +38,22 @@ public class UserSchema {
         return schema;
     }
 
-    public class GetUserDataFetcher implements DataFetcher{
-        private IUserDAO innerUserDAO;
+    private GetUserDataFetcher getUserDataFetcher;
 
-        public GetUserDataFetcher(IUserDAO userDao){
-            innerUserDAO = userDao;
-        }
+    @PostConstruct
+    private void init(){
+        initOutputType();
+        getUserDataFetcher = new GetUserDataFetcher();
+        getUserDataFetcher.innerUserDAO =  this.userDAO;
+        schema = GraphQLSchema.newSchema().query(newObject()
+                .name("GraphQuery")
+                .field(getUser())
+                .build())
+                .build();
+    }
+
+    public class GetUserDataFetcher implements DataFetcher{
+        public IUserDAO innerUserDAO;
 
         @Override
         public Object get(DataFetchingEnvironment dataFetchingEnvironment) {
@@ -52,8 +63,6 @@ public class UserSchema {
             return userDO;
         }
     }
-
-    private DataFetcher getUserDataFetcher;
 
     private void initOutputType() {
         userType = newObject()
@@ -75,19 +84,8 @@ public class UserSchema {
                 .build();
     }
 
-    public UserSchema(){
-        initOutputType();
-        getUserDataFetcher = new GetUserDataFetcher(this.userDAO);
-        schema = GraphQLSchema.newSchema().query(newObject()
-                .name("GraphQuery")
-                .field(getUser())
-                .build())
-                .build();
-
-    }
-
     public Object doQuery(String query){
-        GraphQLSchema schema = new UserSchema().getSchema();
+        GraphQLSchema schema = this.getSchema();
         Map<String, Object> result = null;
 
         try {
@@ -95,12 +93,7 @@ public class UserSchema {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return result;
     }
-
-
-
-
 
 }
