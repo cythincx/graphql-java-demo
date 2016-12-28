@@ -43,8 +43,7 @@ public class UserSchema {
     @PostConstruct
     private void init(){
         initOutputType();
-        getUserDataFetcher = new GetUserDataFetcher();
-        getUserDataFetcher.innerUserDAO =  this.userDAO;
+        getUserDataFetcher = new GetUserDataFetcher(this.userDAO);
         schema = GraphQLSchema.newSchema().query(newObject()
                 .name("GraphQuery")
                 .field(getUser())
@@ -53,7 +52,11 @@ public class UserSchema {
     }
 
     public class GetUserDataFetcher implements DataFetcher{
-        public IUserDAO innerUserDAO;
+        private IUserDAO innerUserDAO;
+
+        public GetUserDataFetcher(IUserDAO userDAO){
+            innerUserDAO = userDAO;
+        }
 
         @Override
         public Object get(DataFetchingEnvironment dataFetchingEnvironment) {
