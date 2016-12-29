@@ -58,7 +58,6 @@ public class UserSchema {
             innerUserDAO = userDAO;
         }
 
-        @Override
         public Object get(DataFetchingEnvironment dataFetchingEnvironment) {
             int id = dataFetchingEnvironment.getArgument("id");
             System.out.println("id=" + id);

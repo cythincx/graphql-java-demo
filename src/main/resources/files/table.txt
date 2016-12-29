@@ -1,0 +1,31 @@
+CREATE TABLE `order` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'pri key',
+  `goods_id` int(11) DEFAULT NULL COMMENT '商品id',
+  `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '订单状态 1待支付 2交易成功 3交易失败',
+  `gross` decimal(10,0) DEFAULT '0' COMMENT '总额',
+  `unit_price` decimal(10,0) NOT NULL DEFAULT '0' COMMENT '单价',
+  `count` int(11) NOT NULL DEFAULT '0' COMMENT '数量',
+  `user_id` int(11) DEFAULT NULL COMMENT '购买者',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '下单时间',
+  `channel` int(10) DEFAULT '1' COMMENT '下单渠道 1h5 2web 3app 4offline',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单表'
+
+CREATE TABLE `goods` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'pri key',
+  `name` varchar(100) NOT NULL DEFAULT '' COMMENT '商品名称',
+  `desc` varchar(500) NOT NULL DEFAULT '' COMMENT '商品介绍',
+  `unit_price` decimal(10,0) NOT NULL DEFAULT '0' COMMENT '单价',
+  `type` int(10) DEFAULT NULL COMMENT '1iphone7 2girlfriend 3chicken',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品表'
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增id',
+  `username` varchar(100) DEFAULT '' COMMENT 'username',
+  `age` int(11) DEFAULT '0' COMMENT '年龄',
+  `sex` tinyint(4) DEFAULT '1' COMMENT '1:男 2:女',
+  `name` varchar(100) DEFAULT '' COMMENT '名字',
+  `pic` varchar(100) DEFAULT '' COMMENT '头像地址',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='用户表'

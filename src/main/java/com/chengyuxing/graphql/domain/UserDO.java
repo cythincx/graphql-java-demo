@@ -1,17 +1,16 @@
 package com.chengyuxing.graphql.domain;
 
-/**
- * Created with IntelliJ IDEA.
- * Author: chengyuxing
- * Date: 2016/12/25
- * Time: 下午6:26
- * Description:
- */
 public class UserDO {
     private Integer id;
+
     private String username;
+
     private Integer age;
-    private Integer sex;
+
+    private Byte sex;
+
+    private String name;
+
     private String pic;
 
     public Integer getId() {
@@ -27,7 +26,7 @@ public class UserDO {
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.username = username == null ? null : username.trim();
     }
 
     public Integer getAge() {
@@ -38,20 +37,27 @@ public class UserDO {
         this.age = age;
     }
 
-    public Integer getSex() {
+    public Byte getSex() {
         return sex;
     }
 
-    public void setSex(Integer sex) {
+    public void setSex(Byte sex) {
         this.sex = sex;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
 
     public String getPic() {
         return pic;
     }
 
     public void setPic(String pic) {
-        this.pic = pic;
+        this.pic = pic == null ? null : pic.trim();
     }
 }

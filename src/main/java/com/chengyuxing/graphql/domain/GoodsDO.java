@@ -1,18 +1,14 @@
 package com.chengyuxing.graphql.domain;
 
-import java.math.BigDecimal;
-
-/**
- * Created by mt-chengyuxing on 2016/12/29.
- * 商品
- */
 public class GoodsDO {
     private Integer id;
+
     private String name;
+
     private String desc;
-    /**单价*/
-    private BigDecimal unitPrice;
-    /**商品种类*/
+
+    private Long unitPrice;
+
     private Integer type;
 
     public Integer getId() {
@@ -28,7 +24,7 @@ public class GoodsDO {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name == null ? null : name.trim();
     }
 
     public String getDesc() {
@@ -36,14 +32,14 @@ public class GoodsDO {
     }
 
     public void setDesc(String desc) {
-        this.desc = desc;
+        this.desc = desc == null ? null : desc.trim();
     }
 
-    public BigDecimal getUnitPrice() {
+    public Long getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(BigDecimal unitPrice) {
+    public void setUnitPrice(Long unitPrice) {
         this.unitPrice = unitPrice;
     }
 

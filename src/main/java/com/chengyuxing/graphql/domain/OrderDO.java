@@ -1,21 +1,24 @@
 package com.chengyuxing.graphql.domain;
 
-import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.util.Date;
 
-/**
- * Created by mt-chengyuxing on 2016/12/29.
- */
 public class OrderDO {
     private Integer id;
+
     private Integer goodsId;
-    private Integer status;
-    private BigDecimal gross;
-    private BigDecimal unitPrice;
+
+    private Byte status;
+
+    private Long gross;
+
+    private Long unitPrice;
+
     private Integer count;
+
     private Integer userId;
+
     private Date createTime;
+
     private Integer channel;
 
     public Integer getId() {
@@ -34,27 +37,27 @@ public class OrderDO {
         this.goodsId = goodsId;
     }
 
-    public Integer getStatus() {
+    public Byte getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(Byte status) {
         this.status = status;
     }
 
-    public BigDecimal getGross() {
+    public Long getGross() {
         return gross;
     }
 
-    public void setGross(BigDecimal gross) {
+    public void setGross(Long gross) {
         this.gross = gross;
     }
 
-    public BigDecimal getUnitPrice() {
+    public Long getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(BigDecimal unitPrice) {
+    public void setUnitPrice(Long unitPrice) {
         this.unitPrice = unitPrice;
     }
 
