@@ -9,9 +9,9 @@ package com.chengyuxing.graphql.domain;
  */
 public class UserDO {
     private Integer id;
+    private String username;
     private Integer age;
     private Integer sex;
-    private String name;
     private String pic;
 
     public Integer getId() {
@@ -20,6 +20,14 @@ public class UserDO {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public Integer getAge() {
@@ -38,13 +46,6 @@ public class UserDO {
         this.sex = sex;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getPic() {
         return pic;
